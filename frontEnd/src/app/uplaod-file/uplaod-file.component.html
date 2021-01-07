@@ -1,0 +1,15 @@
+<!--Input To Select File-->
+<label for="file">Select File
+    <!--Review Image-->
+    <img [src]="imageUrl" alt="Image Review">
+</label>
+<input type="file" id="file" accept="image/*" hidden (change)="onSelectNewFile($event.target?.files)">
+
+
+<!--Image Base64 Code-->
+<textarea rows="10" disabled [innerHTML]="base64"></textarea>
+
+<!--Buttons-->
+<button (click)="convertFileToBase64()">Convert Image To Base64</button>
+<button (click)="saveBase64File()">Save Base64 File</button>
+<button (click)="saveFile()">Save File </button>
