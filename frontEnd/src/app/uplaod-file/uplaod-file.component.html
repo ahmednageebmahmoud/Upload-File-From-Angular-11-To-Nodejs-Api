@@ -3,7 +3,7 @@
     <!--Review Image-->
     <img [src]="imageUrl" alt="Image Review">
 </label>
-<input type="file" id="file" accept="image/*" hidden (change)="onSelectNewFile($event.target?.files)">
+<input type="file" id="file" accept="image/*" hidden (change)="onSelectNewFile($event.target)">
 
 
 <!--Image Base64 Code-->

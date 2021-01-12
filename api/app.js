@@ -2,7 +2,7 @@ const app = require('express')();
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
-const formidable = require('formidable');
+const formidable = require("formidable");
 
 //Init Body Parser
 app.use(bodyParser.json({ limit: "100mb" }));
@@ -42,12 +42,19 @@ app.post('/uplaodFile', (req, res) => {
     let form = formidable({
         uploadDir: "files"
     });
-    form.parse(req, (error, fields, files) => {
-        let filePath = `/files/${Date.now()}_${files.file.name}`;
-        fs.renameSync(path.join(__dirname, files.file.path), path.join(__dirname, filePath))
 
-        res.json(filePath)
+    //Parse Request Body And Save Files By Random Name In "uploadDir"
+    form.parse(req,(error, fields, files) => {
+        
+        //Rename Files Affter Save (Optional)
+        //files.file.path = Old Path If You Want Rename
+        let newFilePath = `/files/${Date.now()}_${files.file.name}`;
+        fs.renameSync(path.join(__dirname, files.file.path), path.join(__dirname, newFilePath));
+        
+        //End Response
+        res.json(newFilePath);
     });
+
 });
 
 

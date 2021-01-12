@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from "@angular/platform-browser";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Event } from '@angular/router';
 @Component({
   selector: 'app-uplaod-file',
   templateUrl: './uplaod-file.component.html',
@@ -20,8 +21,9 @@ export class UplaodFileComponent implements OnInit {
    * On Select New File
    * @param files 
    */
-  onSelectNewFile(files: FileList): void {
-    this.fileSelected = files[0];
+  onSelectNewFile(elemnt:HTMLInputElement): void {
+    if(elemnt.files?.length==0)return;
+    this.fileSelected = (elemnt.files as FileList)[0] ;
     this.imageUrl = this.sant.bypassSecurityTrustUrl(window.URL.createObjectURL(this.fileSelected)) as string;
     this.base64 = "Base64...";
   }
