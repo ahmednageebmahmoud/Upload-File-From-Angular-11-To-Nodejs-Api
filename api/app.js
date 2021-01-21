@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 
 //Uplaod File Base64
 app.post('/uplaodBase64', (req, res) => {
-    let filePath = `/files/${Date.now()}_${req.body.name}`;
+    let filePath = `/files/${Date.now()}_${req.body.name.replace(new RegExp(' ','g'),'_')}`;
     let buffer = Buffer.from(req.body.base64.split(',')[1], "base64");
 
     fs.writeFileSync(path.join(__dirname, filePath), buffer);
@@ -48,7 +48,7 @@ app.post('/uplaodFile', (req, res) => {
         
         //Rename Files Affter Save (Optional)
         //files.file.path = Old Path If You Want Rename
-        let newFilePath = `/files/${Date.now()}_${files.file.name}`;
+        let newFilePath = `/files/${Date.now()}_${files.file.name.replace(new RegExp(' ','g'),'_')}`;
         fs.renameSync(path.join(__dirname, files.file.path), path.join(__dirname, newFilePath));
         
         //End Response

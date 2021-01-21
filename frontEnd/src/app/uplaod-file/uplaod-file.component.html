@@ -3,7 +3,7 @@
     <!--Review Image-->
     <img [src]="imageUrl" alt="Image Review">
 </label>
-<input type="file" id="file" accept="image/*" hidden (change)="onSelectNewFile($event.target)">
+<input type="file" id="file"   hidden (change)="onSelectNewFile($event?.target)">
 
 
 <!--Image Base64 Code-->
@@ -13,3 +13,10 @@
 <button (click)="convertFileToBase64()">Convert Image To Base64</button>
 <button (click)="saveBase64File()">Save Base64 File</button>
 <button (click)="saveFile()">Save File </button>
+<button (click)="saveFileWithProgress()">Save File With Progress </button>
+
+<!--Progress Bar-->
+<div class="progress" *ngIf="barWidth!='0%'">
+    <span [innerHTML]="barWidth"></span>
+    <div class="bar" [style.width]="barWidth"></div>
+</div>
